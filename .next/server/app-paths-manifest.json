@@ -1,0 +1,7 @@
+{
+  "/settings/page": "app/settings/page.js",
+  "/notifications/page": "app/notifications/page.js",
+  "/notifications_2/page": "app/notifications_2/page.js",
+  "/courses/page": "app/courses/page.js",
+  "/page": "app/page.js"
+}
