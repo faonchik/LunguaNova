@@ -8,7 +8,7 @@ export default function Footer() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [teachersExpanded, setTeachersExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTeacher, setSelectedTeacher] = useState(null);
+  const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [showTeacherForm, setShowTeacherForm] = useState(false);
   const [showFindTeacherForm, setShowFindTeacherForm] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -19,20 +19,20 @@ export default function Footer() {
       name: "Дэниал",
       experience: "8 лет",
       level: "C2",
-      image: "/assets/Danka.svg"
+      image: "/assets/Danka.svg",
     },
     {
       name: "Руперт",
       experience: "5 лет",
       level: "C2",
-      image: "/assets/Rupert.svg"
+      image: "/assets/Rupert.svg",
     },
     {
       name: "Эмма",
       experience: "10 лет",
       level: "C2",
-      image: "/assets/Emma.svg"
-    }
+      image: "/assets/Emma.svg",
+    },
   ];
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,11 +65,18 @@ export default function Footer() {
     setTeachersExpanded(!teachersExpanded);
   };
 
-  const handleSelectTeacher = (teacher) => {
+  const handleSelectTeacher = (teacher: Teacher) => {
     setSelectedTeacher(teacher);
     setShowTeacherForm(true);
     setShowFindTeacherForm(false);
   };
+
+  interface Teacher {
+    name: string;
+    experience: string;
+    level: string;
+    image: string;
+  }
 
   const handleFindTeacher = () => {
     setSelectedTeacher(null);
@@ -192,10 +199,15 @@ export default function Footer() {
 
         {/* Карточки преподавателей */}
         <div className="w-full max-w-[374px] bg-white rounded-[15px] p-6 shadow-md mb-4">
-          <h3 className="text-[#47b6f2] text-xl font-bold mb-4">Наши преподаватели</h3>
-          
+          <h3 className="text-[#47b6f2] text-xl font-bold mb-4">
+            Наши преподаватели
+          </h3>
+
           {teachers.map((teacher, index) => (
-            <div key={index} className="flex items-center justify-between space-x-4 mb-4">
+            <div
+              key={index}
+              className="flex items-center justify-between space-x-4 mb-4"
+            >
               <div className="flex items-center space-x-4 flex-1">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
                   <img
@@ -206,11 +218,15 @@ export default function Footer() {
                 </div>
                 <div>
                   <h4 className="font-bold">{teacher.name}</h4>
-                  <p className="text-sm">Опыт преподавания: {teacher.experience}</p>
-                  <p className="text-sm text-[#47b6f2]">Уровень языка: {teacher.level}</p>
+                  <p className="text-sm">
+                    Опыт преподавания: {teacher.experience}
+                  </p>
+                  <p className="text-sm text-[#47b6f2]">
+                    Уровень языка: {teacher.level}
+                  </p>
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => handleSelectTeacher(teacher)}
                 className="bg-[#47b6f2] text-white px-4 py-2 rounded-[5px] hover:bg-[#3da1db] transition-colors"
               >
@@ -219,7 +235,7 @@ export default function Footer() {
             </div>
           ))}
 
-          <button 
+          <button
             onClick={handleFindTeacher}
             className="w-full mt-4 bg-[#47b6f2] text-white py-3 rounded-[5px] hover:bg-[#3da1db] transition-colors font-bold"
           >
@@ -231,56 +247,92 @@ export default function Footer() {
         {showTeacherForm && (
           <div className="w-full max-w-[374px] bg-white rounded-[15px] p-6 shadow-md mb-4">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-[#47b6f2] text-[38px] font-bold">ОСТАВЬТЕ ЗАЯВКУ</h3>
-              <button onClick={handleCloseForms} className="text-[#47b6f2] text-xl">×</button>
+              <h3 className="text-[#47b6f2] text-[38px] font-bold">
+                ОСТАВЬТЕ ЗАЯВКУ
+              </h3>
+              <button
+                onClick={handleCloseForms}
+                className="text-[#47b6f2] text-xl"
+              >
+                ×
+              </button>
             </div>
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Как вас зовут?</div>
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Как вас зовут?
+              </div>
               <input className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" />
             </div>
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Email</div>
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Email
+              </div>
               <input className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" />
             </div>
 
-            <div className="mb-4">
-              <div className="text-[#47b6f2] text-xl font-semibold mb-2">Преподаватель</div>
-              <div className="flex items-center bg-[#f2f2f2] p-3 rounded-[5px]">
-                <img 
-                  src={selectedTeacher.image} 
-                  alt={selectedTeacher.name}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <div className="font-bold">{selectedTeacher.name}</div>
-                  <div className="text-sm">Опыт: {selectedTeacher.experience}</div>
+            {selectedTeacher && (
+              <div className="mb-4">
+                <div className="text-[#47b6f2] text-xl font-semibold mb-2">
+                  Преподаватель
+                </div>
+                <div className="flex items-center bg-[#f2f2f2] p-3 rounded-[5px]">
+                  <img
+                    src={selectedTeacher.image}
+                    alt={selectedTeacher.name}
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                  <div>
+                    <div className="font-bold">{selectedTeacher.name}</div>
+                    <div className="text-sm">
+                      Опыт: {selectedTeacher.experience}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Телефон</div>
-              <input 
-                className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" 
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Телефон
+              </div>
+              <input
+                className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4"
                 placeholder="+7 (999) 999 99 99"
               />
             </div>
 
             <div className="mb-6">
-              <div className="text-[#47b6f2] text-xl font-semibold mb-2">Как лучше с вами связаться?</div>
-              <div className="flex items-center mb-2">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Написать в WhatsApp</span>
+              <div className="text-[#47b6f2] text-xl font-semibold mb-2">
+                Как лучше с вами связаться?
               </div>
               <div className="flex items-center mb-2">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Написать в Telegram</span>
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Написать в WhatsApp
+                </span>
+              </div>
+              <div className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Написать в Telegram
+                </span>
               </div>
               <div className="flex items-center">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Позвонить по телефону</span>
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Позвонить по телефону
+                </span>
               </div>
             </div>
 
@@ -289,7 +341,12 @@ export default function Footer() {
             </button>
 
             <div className="text-center text-[#47b6f2] text-base mb-2">
-              Нажимая на кнопку, вы даете <span className="font-bold underline">согласие</span> на обработку персональных данных и соглашаетесь с <span className="font-bold underline">политикой конфиденциальности</span>
+              Нажимая на кнопку, вы даете{" "}
+              <span className="font-bold underline">согласие</span> на обработку
+              персональных данных и соглашаетесь с{" "}
+              <span className="font-bold underline">
+                политикой конфиденциальности
+              </span>
             </div>
 
             <div className="text-center text-[#47b6f2] text-2xl font-medium">
@@ -302,22 +359,35 @@ export default function Footer() {
         {showFindTeacherForm && (
           <div className="w-full max-w-[374px] bg-white rounded-[15px] p-6 shadow-md mb-4">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-[#47b6f2] text-[38px] font-bold">ОСТАВЬТЕ ЗАЯВКУ</h3>
-              <button onClick={handleCloseForms} className="text-[#47b6f2] text-xl">×</button>
+              <h3 className="text-[#47b6f2] text-[38px] font-bold">
+                ОСТАВЬТЕ ЗАЯВКУ
+              </h3>
+              <button
+                onClick={handleCloseForms}
+                className="text-[#47b6f2] text-xl"
+              >
+                ×
+              </button>
             </div>
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Как вас зовут?</div>
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Как вас зовут?
+              </div>
               <input className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" />
             </div>
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Email</div>
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Email
+              </div>
               <input className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" />
             </div>
 
             <div className="mb-4">
-              <div className="text-[#47b6f2] text-xl font-semibold mb-2">Пол преподавателя</div>
+              <div className="text-[#47b6f2] text-xl font-semibold mb-2">
+                Пол преподавателя
+              </div>
               <select className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4">
                 <option>Не важно</option>
                 <option>Мужской</option>
@@ -326,48 +396,85 @@ export default function Footer() {
             </div>
 
             <div className="mb-4">
-              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">Телефон</div>
-              <input 
-                className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4" 
+              <div className="text-[#d9d9d9] text-sm font-semibold mb-1">
+                Телефон
+              </div>
+              <input
+                className="w-full h-[50px] rounded-[5px] border-2 border-[#47b6f2] px-4"
                 placeholder="+7 (999) 999 99 99"
               />
             </div>
 
             <div className="mb-4">
-              <div className="text-[#47b6f2] text-xl font-semibold mb-2">Желаемый стаж преподавателя</div>
+              <div className="text-[#47b6f2] text-xl font-semibold mb-2">
+                Желаемый стаж преподавателя
+              </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="flex items-center">
-                  <input type="radio" name="experience" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
+                  <input
+                    type="radio"
+                    name="experience"
+                    className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                  />
                   <span className="text-[#47b6f2] text-base">1+ год</span>
                 </div>
                 <div className="flex items-center">
-                  <input type="radio" name="experience" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
+                  <input
+                    type="radio"
+                    name="experience"
+                    className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                  />
                   <span className="text-[#47b6f2] text-base">5+ лет</span>
                 </div>
                 <div className="flex items-center">
-                  <input type="radio" name="experience" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
+                  <input
+                    type="radio"
+                    name="experience"
+                    className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                  />
                   <span className="text-[#47b6f2] text-base">10+ лет</span>
                 </div>
                 <div className="flex items-center">
-                  <input type="radio" name="experience" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
+                  <input
+                    type="radio"
+                    name="experience"
+                    className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                  />
                   <span className="text-[#47b6f2] text-base">15+ лет</span>
                 </div>
               </div>
             </div>
 
             <div className="mb-6">
-              <div className="text-[#47b6f2] text-xl font-semibold mb-2">Как лучше с вами связаться?</div>
-              <div className="flex items-center mb-2">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Написать в WhatsApp</span>
+              <div className="text-[#47b6f2] text-xl font-semibold mb-2">
+                Как лучше с вами связаться?
               </div>
               <div className="flex items-center mb-2">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Написать в Telegram</span>
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Написать в WhatsApp
+                </span>
+              </div>
+              <div className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Написать в Telegram
+                </span>
               </div>
               <div className="flex items-center">
-                <input type="checkbox" className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2" />
-                <span className="text-[#47b6f2] text-base">Позвонить по телефону</span>
+                <input
+                  type="checkbox"
+                  className="w-[18px] h-[18px] rounded-full border-2 border-[#47b6f2] mr-2"
+                />
+                <span className="text-[#47b6f2] text-base">
+                  Позвонить по телефону
+                </span>
               </div>
             </div>
 
@@ -376,7 +483,12 @@ export default function Footer() {
             </button>
 
             <div className="text-center text-[#47b6f2] text-base mb-2">
-              Нажимая на кнопку, вы даете <span className="font-bold underline">согласие</span> на обработку персональных данных и соглашаетесь с <span className="font-bold underline">политикой конфиденциальности</span>
+              Нажимая на кнопку, вы даете{" "}
+              <span className="font-bold underline">согласие</span> на обработку
+              персональных данных и соглашаетесь с{" "}
+              <span className="font-bold underline">
+                политикой конфиденциальности
+              </span>
             </div>
 
             <div className="text-center text-[#47b6f2] text-2xl font-medium">

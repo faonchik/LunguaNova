@@ -1,7 +1,5 @@
 {
-  "/teachers_english/page": "app/teachers_english/page.js",
-  "/courses/chine/page": "app/courses/chine/page.js",
-  "/notifications/page": "app/notifications/page.js",
+  "/page": "app/page.js",
   "/courses/english/page": "app/courses/english/page.js",
-  "/page": "app/page.js"
+  "/teachers_english/page": "app/teachers_english/page.js"
 }
