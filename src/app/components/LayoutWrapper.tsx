@@ -17,6 +17,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
     "/notifications/*",       // Все подпути уведомлений
     "/notification",
     "/courses",
+    "/teachers_english",
   ];
 
   // Проверяем, нужно ли скрыть header для текущего пути

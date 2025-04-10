@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface FAQItem {
   id: number;
@@ -30,8 +30,7 @@ export function FAQ({ questions }: FAQProps) {
         {questions.map((item) => (
           <div
             key={item.id}
-            data-state={expandedQuestions.includes(item.id) ? "open" : "closed"}
-            className="mb-5 rounded-[15px] border-[3px] border-solid border-[#47b6f2] overflow-hidden"
+            className="mb-5 rounded-[15px] border-[3px] border-solid border-[#47b6f2] overflow-hidden transition-all duration-300"
           >
             <h3 className="flex">
               <button
@@ -39,7 +38,7 @@ export function FAQ({ questions }: FAQProps) {
                 onClick={() => toggleQuestion(item.id)}
                 aria-controls={`accordion-content-${item.id}`}
                 aria-expanded={expandedQuestions.includes(item.id)}
-                className="flex flex-1 items-center justify-between text-sm font-medium transition-all text-left [&[data-state=open]>svg]:rotate-180 px-6 py-4 hover:no-underline"
+                className="flex flex-1 items-center justify-between text-sm font-medium transition-all text-left px-6 py-4 hover:no-underline group"
               >
                 <span className="font-extrabold text-[#47b6f2] text-xl tracking-[-0.40px] text-left">
                   {item.question}
@@ -50,11 +49,13 @@ export function FAQ({ questions }: FAQProps) {
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
+                  stroke="#47b6f2"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4 shrink-0 text-[#47b6f2] transition-transform duration-200"
+                  className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
+                    expandedQuestions.includes(item.id) ? "rotate-180" : ""
+                  }`}
                 >
                   <path d="m6 9 6 6 6-6"></path>
                 </svg>
@@ -64,14 +65,18 @@ export function FAQ({ questions }: FAQProps) {
               id={`accordion-content-${item.id}`}
               role="region"
               aria-labelledby={`accordion-trigger-${item.id}`}
-              className={`overflow-hidden text-sm ${
-                !expandedQuestions.includes(item.id) && "hidden"
+              className={`grid transition-all duration-300 ease-in-out ${
+                expandedQuestions.includes(item.id)
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
               }`}
             >
-              <div className="px-6 pb-4">
-                <p className="font-medium text-[#47b6f2] text-sm tracking-[-0.28px] whitespace-pre-line">
-                  {item.answer}
-                </p>
+              <div className="overflow-hidden">
+                <div className="px-6 pb-4">
+                  <p className="font-medium text-[#47b6f2] text-sm tracking-[-0.28px] whitespace-pre-line">
+                    {item.answer}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -6,7 +6,6 @@ import { LanguageCard } from "./components/LanguageCard";
 import { FAQ } from "./components/FAQ";
 import { RegistrationForm } from "./components/RegistrationForm";
 import { skillButtonsData, languagesData, questions } from "./data";
-import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
@@ -19,8 +18,9 @@ export default function HomePage() {
   const registrationFormRef = useRef<HTMLDivElement>(null);
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  // Проверяем позицию скролла
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const checkScroll = () => {
       if (window.scrollY > 300) {
         setShowScrollButton(true);
@@ -61,7 +61,6 @@ export default function HomePage() {
       className={`text-[#48B7F2] space-y-6 flex flex-col items-center ${inter.className} px-4 relative`}
       style={{ minHeight: "1054px" }}
     >
-      {/* Кнопка прокрутки вверх */}
       {showScrollButton && (
         <button
           onClick={scrollToTop}
@@ -117,9 +116,8 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* Остальные секции остаются без изменений */}
       <section className="mt-6 w-full flex flex-col items-center">
-        <h2 className="font-inter font-bold text-[16px] w-[268px] h-[34px] flex items-center justify-center text-center">
+        <h2 className="font-bold text-[16px] w-[268px] h-[34px] flex items-center justify-center text-center">
           ИНДИВИДУАЛЬНАЯ ПРОГРАММА
         </h2>
         <div className="mt-6 grid grid-cols-2 gap-4 justify-items-center">
@@ -136,15 +134,19 @@ export default function HomePage() {
               ТОЛЬКО ЛУЧШИЕ ПРЕПОДАВАТЕЛИ
             </h3>
             <div className="relative w-full h-[100px]">
-              <img
+              <Image
                 src="/assets/Certificates1.svg"
                 alt="Сертификаты преподавателей"
-                className="absolute left-0 top-0 w-[160px] h-full object-cover"
+                width={160}
+                height={100}
+                className="absolute left-0 top-0 object-cover"
               />
-              <img
+              <Image
                 src="/assets/Certificates2.svg"
                 alt="Дополнительные сертификаты"
-                className="absolute left-[126px] top-[3px] w-[135px] h-[110px] object-cover"
+                width={135}
+                height={110}
+                className="absolute left-[126px] top-[3px] object-cover"
               />
             </div>
           </div>
@@ -152,7 +154,7 @@ export default function HomePage() {
       </section>
 
       <section className="mt-10 w-full flex flex-col items-center">
-        <h2 className="font-inter font-extrabold text-[24px] text-center mb-6">
+        <h2 className="font-extrabold text-[24px] text-center mb-6">
           МЫ ПРЕПОДАЕМ:
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

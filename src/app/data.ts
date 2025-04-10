@@ -118,55 +118,55 @@ export const languagesData = [
     name: "Английский",
     coursesCount: 15,
     flagImagePath: "/assets/British.svg",
-    link: "/courses/english", // пример ссылки
+    href: "/courses/english",
   },
   {
     id: 2,
     name: "Немецкий",
     coursesCount: 15,
     flagImagePath: "/assets/Germany.svg",
-    link: "/courses/german", // пример ссылки
+    href: "/courses/german",
   },
   {
     id: 3,
     name: "Французский",
     coursesCount: 15,
     flagImagePath: "/assets/Franch.svg",
-    link: "/courses/french", // пример ссылки
+    href: "/courses/french",
   },
   {
     id: 4,
     name: "Испанский",
     coursesCount: 15,
     flagImagePath: "/assets/Spanish.svg",
-    link: "/courses/spanish", // пример ссылки
+    href: "/courses/spanish",
   },
   {
     id: 5,
     name: "Китайский",
     coursesCount: 15,
     flagImagePath: "/assets/Chine.svg",
-    link: "/courses/chinese", // пример ссылки
+    href: "/courses/chine",
   },
   {
     id: 6,
     name: "Японский",
     coursesCount: 15,
     flagImagePath: "/assets/Japan.svg",
-    link: "/courses/japanese", // пример ссылки
+    href: "/courses/japanese",
   },
   {
     id: 7,
     name: "Итальянский",
     coursesCount: 15,
     flagImagePath: "/assets/Italy.svg",
-    link: "/courses/italian", // пример ссылки
+    href: "/courses/italian",
   },
   {
     id: 8,
     name: "Финский",
     coursesCount: 15,
     flagImagePath: "/assets/Finland.svg",
-    link: "/courses/finnish", // пример ссылки
+    href: "/courses/finnish",
   },
 ];
