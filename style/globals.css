@@ -1,0 +1,45 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.t181__wrapper {
+  text-align: center;
+}
+
+.t-btnwrapper {
+  display: inline-block;
+}
+
+.t181__button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* Анимации для плавающей кнопки */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.group:hover .group-hover\:block {
+  animation: fadeIn 0.2s ease-out;
+}

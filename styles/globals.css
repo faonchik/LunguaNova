@@ -1,0 +1,978 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.parallax-bg {
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.t-cover {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.t-btn {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.t181__wrapper {
+  text-align: center;
+}
+
+.t-animate {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 1s cubic-bezier(.19,1,.22,1);
+  will-change: transform, opacity;
+}
+
+.t-animate_started {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+.t-animate[data-animate-style="fadeinleft"] {
+  opacity: 0;
+  transform: translate3d(-100px, 0, 0);
+}
+
+.t-animate_started[data-animate-style="fadeinleft"] {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.t-animate__chain_showed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.t796__shape-border {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.t796__shape-border_top {
+  top: -1px;
+}
+
+.t796__shape-border_bottom-flip {
+  bottom: -1px;
+  transform: rotateX(180deg);
+}
+
+/* Анимация появления слева */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Анимация блюра */
+@keyframes unblur {
+  from {
+    filter: blur(20px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+/* Задержки для цепочки анимаций */
+.t-animate[data-animate-chain="yes"] {
+  animation-play-state: paused;
+}
+
+.t-animate_started[data-animate-chain="yes"] {
+  animation-play-state: running;
+}
+
+/* Стили для блюра фона */
+.t-cover__carrier {
+  animation: unblur 2s ease-out;
+}
+
+/* Блюр эффект */
+.blur-animation {
+  animation: unblurEffect 2s ease-out forwards;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+@keyframes unblurEffect {
+  0% {
+    filter: blur(20px) brightness(1.1);
+    transform: scale(1.1);
+  }
+  100% {
+    filter: blur(0) brightness(1);
+    transform: scale(1);
+  }
+}
+
+/* Добавляем префиксы для лучшей поддержки браузеров */
+@-webkit-keyframes unblurEffect {
+  0% {
+    -webkit-filter: blur(20px);
+  }
+  100% {
+    -webkit-filter: blur(0);
+  }
+}
+
+/* Обновляем стили для блока преимуществ */
+.t1115 {
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.t-container_flex {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.t1115__container_vmiddle {
+  align-items: center;
+}
+
+.t-col_6 {
+  width: 50%;
+  padding: 0 20px;
+}
+
+.t1115__textwrapper {
+  margin-bottom: 40px;
+}
+
+.t1115__title {
+  margin-bottom: 20px;
+}
+
+.t1115__features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.t1115__feature {
+  display: flex;
+  align-items: flex-start;
+}
+
+.t1115__feature-icon-wrap {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+}
+
+.t1115__feature-img {
+  width: 100%;
+  height: 100%;
+}
+
+.t1115__feature-text-wrap {
+  flex: 1;
+}
+
+.t1115__feature-title {
+  margin-bottom: 8px;
+}
+
+.t-title_xs {
+  font-size: 30px;
+  line-height: 1.17;
+}
+
+.t-descr_xl {
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.t-name_md {
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.t-descr_sm {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.t-align_left {
+  text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+  .t-container_flex {
+    flex-direction: column;
+  }
+
+  .t-col_6 {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .t1115__features {
+    grid-template-columns: 1fr;
+  }
+
+  .t1115__col-bottom {
+    margin-top: 40px;
+  }
+}
+
+/* Стили для блока Features */
+.t1050__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.t1050__col {
+  width: 33.33%;
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.t1050__line {
+  margin: 15px 0;
+  border-top-width: 2px;
+}
+
+.t-animate {
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.t-animate_started {
+  opacity: 1;
+}
+
+.t-animate[data-animate-style="fadeinleft"] {
+  transform: translateX(-100px);
+}
+
+.t-animate_started[data-animate-style="fadeinleft"] {
+  transform: translateX(0);
+}
+
+@media screen and (max-width: 960px) {
+  .t1050__col {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .t1050__col {
+    width: 100%;
+  }
+}
+
+/* Обновленные стили для стрелок навигации */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e8e8e8 !important;
+  border-radius: 50% !important;
+  margin: 0 20px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 15px !important;
+  color: #000000 !important;
+}
+
+/* Обновленные стили для контейнера стрелок */
+.t-slds__arrow {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e8e8e8 !important;
+  border-radius: 50% !important;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Стили для контейнера галереи */
+.swiper-container {
+  width: 600px !important;
+  height: 400px !important;
+  margin-left: 85px !important;
+}
+
+/* Убедитесь, что галерея видима */
+.housing-gallery {
+  min-height: 510px;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .t396__artboard {
+    height: 380px;
+  }
+
+  .swiper {
+    width: 320px !important;
+    height: 200px !important;
+  }
+}
+
+/* Стили для артборда */
+.t396__artboard {
+  position: relative;
+  width: 100%;
+  height: 510px;
+  margin: 0 auto;
+}
+
+.t396__artboard.rendered {
+  visibility: visible;
+}
+
+/* Стили для Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e8e8e8 !important;
+  border-radius: 50% !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 15px !important;
+  color: #000000 !important;
+}
+
+.swiper-button-prev {
+  left: 20px !important;
+}
+
+.swiper-button-next {
+  right: 20px !important;
+}
+
+/* Стили для контейнера */
+.swiper-container {
+  overflow: visible !important;
+}
+
+/* Стили для галереи */
+.t-slds {
+  position: relative;
+}
+
+.t-slds__main {
+  position: relative;
+  overflow: hidden;
+}
+
+.tn-atom__slds-img {
+  background-size: cover;
+  background-position: center;
+}
+
+.t-slds__arrow_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.t-slds__arrow_wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: all;
+}
+
+.t-slds__arrow_wrapper-left {
+  left: 0;
+}
+
+.t-slds__arrow_wrapper-right {
+  right: 0;
+}
+
+.t-slds__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+  cursor: pointer;
+}
+
+.t-slds__arrow_body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #e8e8e8 !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px !important;
+  color: black !important;
+}
+
+/* Стили для заголовка и линии */
+.tn-atom[field="tn_text_1743684892252"] {
+  font-size: 37px;
+  line-height: 37px;
+  margin-bottom: 10px;
+}
+
+.tn-atom[data-elem-id="1743688205118"] {
+  width: 300px;
+  height: 2px;
+  background-color: #032a62;
+  margin: 0 auto;
+}
+
+/* Стили для кругов и текста */
+.tn-atom[data-elem-type="shape"] {
+  width: 170px;
+  height: 170px;
+  border: 2px solid #4e6991;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tn-atom[data-elem-type="text"] {
+  font-size: 16px;
+  line-height: 25px;
+  text-align: center;
+}
+
+/* Стили для плюсов */
+.tn-atom[field="tn_text_1743684640331"],
+.tn-atom[field="tn_text_1743684676612"] {
+  font-size: 31px;
+  line-height: 31px;
+  position: relative;
+  top: 65px;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media screen and (max-width: 320px) {
+  .t396__artboard {
+    height: 380px;
+  }
+
+  .t-slds__main {
+    width: 320px;
+    height: 200px;
+    margin-left: 0;
+  }
+
+  .tn-atom__slds-img {
+    width: 320px !important;
+    height: 200px !important;
+  }
+}
+
+/* Добавьте эти стили */
+section {
+  min-height: 510px;
+  margin-bottom: 40px; /* Отступ между секциями */
+}
+
+.swiper-container {
+  overflow: visible !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e8e8e8 !important;
+  border-radius: 50% !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 15px !important;
+  color: #000000 !important;
+}
+
+/* Позиционирование стрелок */
+.swiper-button-prev {
+  left: 20px !important;
+}
+
+.swiper-button-next {
+  right: 20px !important;
+}
+
+/* Добавляем стили для контейнера свайпера */
+.swiper {
+  overflow: hidden !important;
+}
+
+.swiper-slide {
+  overflow: hidden !important;
+}
+
+/* Обновляем стили для навигационных кнопок, чтобы они были поверх контента */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #e8e8e8 !important;
+  border-radius: 50% !important;
+  z-index: 10 !important;
+}
+
+.swiper-button-prev {
+  left: 20px !important;
+}
+
+.swiper-button-next {
+  right: 20px !important;
+}
+
+/* Убираем лишние стили */
+.swiper-container {
+  overflow: hidden !important;
+}
+
+/* Добавьте эти стили в конец файла globals.css */
+
+.research-development {
+  padding: 30px 0;
+}
+
+.research-development__image {
+  position: relative;
+  width: 100%;
+  height: 571px;
+}
+
+.research-development__content {
+  background-color: #032a62;
+  height: 571px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.research-development__title {
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.research-development__divider {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  opacity: 0.6;
+  margin-bottom: 24px;
+}
+
+.research-development__text {
+  color: white;
+  font-size: 20px;
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 768px) {
+  .research-development__image,
+  .research-development__content {
+    height: auto;
+  }
+  
+  .research-development__content {
+    padding: 32px;
+  }
+}
+
+/* Добавьте эти стили в конец файла globals.css */
+
+.t396__artboard {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #e8e8e8 !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px !important;
+  color: black !important;
+}
+
+@media (max-width: 768px) {
+  .t396__artboard {
+    height: auto !important;
+    padding: 40px 0;
+  }
+  
+  .swiper-container {
+    width: 100% !important;
+    height: 300px !important;
+  }
+}
+
+/* Добавьте эти стили в конец файла globals.css */
+
+.t-slds {
+  position: relative;
+}
+
+.t-slds__main {
+  position: relative;
+  overflow: hidden;
+}
+
+.tn-atom__slds-img {
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.t-slds__arrow_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.t-slds__arrow_wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: all;
+}
+
+.t-slds__arrow_wrapper-left {
+  left: 0;
+}
+
+.t-slds__arrow_wrapper-right {
+  right: 0;
+}
+
+.t-slds__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.t-slds__arrow:hover {
+  background-color: #d8d8d8;
+}
+
+.t-slds__arrow_body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.t-slds__arrow_body:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+}
+
+.t-slds__arrow_body-left:before {
+  transform: translate(-25%, -50%) rotate(-135deg);
+}
+
+.t-slds__arrow_body-right:before {
+  transform: translate(-75%, -50%) rotate(45deg);
+}
+
+/* Стили для слайдера ThreadedProducts */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #e8e8e8 !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 12px !important;
+  color: black !important;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .swiper-container {
+    width: 320px;
+    height: 300px;
+  }
+  
+  .circle-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Стили для компонента ResearchDevelopment */
+.t477 {
+  position: relative;
+}
+
+.t477 .t-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.t477__blockimg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.t477__textwrapper {
+  position: relative;
+  padding: 0;
+}
+
+.t477__content {
+  padding: 0;
+}
+
+@media screen and (max-width: 960px) {
+  .t477 table,
+  .t477 tbody,
+  .t477 tr,
+  .t477 td {
+    display: block;
+    width: 100% !important;
+  }
+
+  .t477__blockimg {
+    height: 300px !important;
+    margin-bottom: 20px;
+  }
+
+  .t477__textwrapper {
+    height: auto !important;
+    padding: 30px 20px;
+  }
+
+  .t477__title {
+    font-size: 24px !important;
+    line-height: 28px !important;
+  }
+
+  .t477__descr {
+    font-size: 16px !important;
+  }
+}
+
+/* Стили для компонента ProductionProcess */
+.t1106 {
+  padding: 0;
+}
+
+.t1106__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.t1106__number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.t1106__line {
+  position: absolute;
+  background-color: #e6e6e6;
+  width: 260px;
+  height: 2px;
+  top: 19px;
+  left: 50%;
+}
+
+.t1106__line_mobile {
+  display: none;
+  background-color: #e6e6e6;
+}
+
+@media screen and (max-width: 767px) {
+  .t1106__col {
+    margin-bottom: 45px;
+  }
+  
+  .t1106__col:last-child {
+    margin-bottom: 0;
+  }
+  
+  .t1106__title {
+    font-size: 18px !important;
+  }
+
+  .t1106__line_mobile {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 38px;
+  }
+}
+
+/* Стили для QualityControl */
+.t491__img {
+  flex-shrink: 0;
+}
+
+.t-animate {
+  opacity: 1;
+  transition: all 0.7s ease-in-out;
+}
+
+.t-animate[data-animate-style="fadeinup"] {
+  transform: translateY(0);
+}
+
+.t-animate[data-animate-chain="yes"] {
+  transition-delay: var(--delay, 0s);
+}
+
+@media screen and (max-width: 767px) {
+  .t491__wrapper {
+    margin-bottom: 30px;
+  }
+}
+
+/* Добавим глобальный стиль для Arial */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Убедимся, что все текстовые элементы в компоненте используют Arial */
+.t491 * {
+  font-family: Arial, sans-serif;
+}
+
+.t-card__title {
+  font-size: 18px !important;
+}
+
+/* Стили для PartnersSection */
+.t1074__img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.t1074__img:hover {
+  transform: scale(1.05);
+}
+
+.t1074__textwrapper {
+  margin-bottom: 40px;
+}
+
+.t-cover__carrier {
+  z-index: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .t1074__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Переопределим стили для t-rec */
+.t-rec {
+  min-height: auto !important; /* Убираем min-height */
+  margin-bottom: 0 !important; /* Убираем margin-bottom */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Для поддержки Safari */
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+} 
